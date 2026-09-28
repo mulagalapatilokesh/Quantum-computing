@@ -1,1 +1,1 @@
-# Quantun-computing
+# Quantum-computing
