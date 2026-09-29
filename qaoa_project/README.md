@@ -51,7 +51,7 @@ Energy -8 on the 8-edge graph means every edge is cut, the best possible.
 - [x] Step 3: classical.py
 - [x] Step 4: engine.py (the QAOA circuit)
 - [x] Step 5: run_demo.py
-- [ ] Step 6: tests
+- [x] Step 6: tests
 
 ## Step 4: The QAOA engine, `qaoa/engine.py` (done)
 Why: this is QAOA itself. It builds the quantum circuit, lets a classical optimizer tune it, and reads out
@@ -93,3 +93,21 @@ It has three parts:
 Result of Step C: both find `010101` with energy -8.0 (all 8 edges cut), so QAOA found the best answer.
 Brute force took about 0.0002 s and QAOA about 0.6 s. Classical is faster on a problem this small
 because there are only 64 possible answers. The comparison becomes interesting only as problems grow.
+
+## Step 6: Automatic tests, `tests/test_qaoa.py` (done)
+Why: instead of checking numbers by eye, tests check them automatically and prove the code is correct.
+
+Four tests:
+- the tiny problem's four energies are exactly right
+- the QUBO and Ising forms agree on every bitstring of a 4-variable problem
+- brute force returns the true minimum
+- QAOA reaches the same energy as brute force on a small graph
+
+Run with:
+    python3 -m unittest discover -s tests -v
+Result: all 4 tests passed (OK).
+
+## QAOA project status: COMPLETE
+All 6 steps are done. QAOA builds a QUBO, converts it to Ising, runs a real quantum circuit tuned by a
+classical optimizer, and matches the classical brute-force answer, proven by automatic tests.
+Next: build VQE the same way, in its own project, then combine both into one framework.
