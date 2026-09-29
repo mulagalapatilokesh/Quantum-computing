@@ -50,7 +50,7 @@ Energy -8 on the 8-edge graph means every edge is cut, the best possible.
 - [x] Step 2: qubo.py
 - [x] Step 3: classical.py
 - [x] Step 4: engine.py (the QAOA circuit)
-- [ ] Step 5: run_demo.py
+- [x] Step 5: run_demo.py
 - [ ] Step 6: tests
 
 ## Step 4: The QAOA engine, `qaoa/engine.py` (done)
@@ -80,3 +80,16 @@ Result of the check on the 2-variable problem: solution `10` (or `01`), energy -
 about 50/50 between `10` and `01`, the two best answers. On the 6-node Max-Cut graph QAOA found
 `010101` with energy -8.0, the same as brute force. The optimizer lowered the average energy from -3.649
 to -4.854 over 142 steps. Brute force is far faster on problems this small, which is expected.
+
+## Step 5: The demo, `run_demo.py` (done)
+Why: it puts the whole project into one file that can be run at any time. Run it from inside
+`qaoa_project`:
+    python3 run_demo.py
+It has three parts:
+- Step A prints the energy of every bitstring of the 2-variable problem (00 -> 0, 01 -> -1, 10 -> -1, 11 -> 0).
+- Step B prints the QUBO energy and the Ising energy side by side. They match, so the conversion is correct.
+- Step C solves Max-Cut on a 6-node graph with QAOA and with brute force and compares them.
+
+Result of Step C: both find `010101` with energy -8.0 (all 8 edges cut), so QAOA found the best answer.
+Brute force took about 0.0002 s and QAOA about 0.6 s. Classical is faster on a problem this small
+because there are only 64 possible answers. The comparison becomes interesting only as problems grow.
